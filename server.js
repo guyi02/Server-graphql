@@ -16,7 +16,7 @@ import Player from './src/Models/Player';
 import Team from './src/Models/Team';
 
 // linha 1 recebe os schemas
-//linha 2 recebe nossos resolvers ou controllers
+//linha 2 recebe os resolvers ou controllers
 const server = new GraphQLServer({
   typeDefs: importSchema('./src/Schema/index.graphql'),
   resolvers,
