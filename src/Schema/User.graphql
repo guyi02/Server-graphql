@@ -1,0 +1,86 @@
+# **********
+# TYPES
+# *******
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  confirmPassword: String!
+  is_team: Boolean!
+  pro_user: ProUser
+  trial: Trial
+}
+
+type DeleteResponse {
+  message: String
+}
+
+type ProUser {
+  active: Boolean
+  start_in: String
+}
+
+type Trial {
+  is_trial: Boolean
+  start_in: String
+}
+
+# **********
+# FIM TYPES
+# *******
+
+
+# **********
+# INPUTS
+# *******
+input InputUser {
+  email: String!
+  password: String!
+  confirmPassword: String!
+  is_team: Boolean!
+  pro_user: InputProUser
+  trial: InputTrial
+}
+
+input InputUserUpdate {
+  id: ID
+  email: String
+  password: String
+  confirmPassword: String
+  is_team: Boolean
+  pro_user: InputProUser
+  trial: InputTrial
+}
+
+input InputDiferencials {
+  good: String,
+  very_good: String,
+  excelent: String
+}
+
+input InputAvaliableDays {
+  day: String
+}
+
+input InputAvaliableHours {
+  hour: String
+}
+
+input InputFindPositions {
+  position: String
+}
+
+input InputProUser {
+  active: Boolean
+  start_in: String
+}
+
+input InputTrial {
+  is_trial: Boolean
+  start_in: String
+}
+
+
+# **********
+# FIM INPUTS
+# *******

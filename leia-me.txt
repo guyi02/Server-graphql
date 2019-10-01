@@ -1,0 +1,10 @@
+libs para usar o es6 (import) no node 
+
+babel-cli
+babel-preset-env
+
+apos isso criar um arquivo .babelrc com conteudo:
+
+{
+  "presets": ["env"]
+}

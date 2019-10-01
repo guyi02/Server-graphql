@@ -1,0 +1,24 @@
+# **********
+# TYPES
+# *******
+
+type LoginResponse {
+  token: String
+  user: User
+  logged: Boolean
+}
+# **********
+# FIM TYPES
+# *******
+
+
+# **********
+# INPUTS
+# *******
+input InputLogin {
+  email: String!
+  password: String!
+}
+# **********
+# FIM INPUTS
+# *******

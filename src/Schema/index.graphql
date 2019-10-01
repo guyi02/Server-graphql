@@ -1,0 +1,6 @@
+#import User from 'User.graphql'
+#import Login from 'Login.graphql'
+#import Player from 'Player.graphql'
+#import Team from 'Team.graphql'
+#import Mutation from 'Mutation.graphql'
+#import Query from 'Query.graphql'

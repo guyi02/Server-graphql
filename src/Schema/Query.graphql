@@ -1,0 +1,8 @@
+#query pode se dizer que é nosso GET
+type Query {
+  getUsers: [User!]
+  getUser(id: ID!): User
+  getPlayer(id: ID!): Player
+  getPlayers: [Player!]
+  getTeams: [Team]
+}

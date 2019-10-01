@@ -1,0 +1,25 @@
+#mutation é o resto do nosso crud (delete, update, create...)
+type Mutation {
+  # USER
+  createUser(
+      dados: InputUser!
+  ): User
+
+  updateUser(
+      dados: InputUserUpdate
+  ): User
+
+  deleteUser(_id: ID): DeleteResponse
+ # AUTH
+  login(
+      dados: InputLogin
+  ): LoginResponse
+ # PLAYER
+  RegisterPlayer(
+    dados: PlayerInput
+  ): Player
+ # TEAM
+  RegisterTeam(
+    dados: TeamInput
+  ): Team
+}

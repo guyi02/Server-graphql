@@ -1,0 +1,57 @@
+# **********
+# TYPES
+# *******
+type Team {
+  id: ID
+  team_name: String!
+  team_image: String
+  month_payment: [FinancialType]
+  spending: [FinancialType]
+  profit: [FinancialType]
+  find_player: Boolean
+  find_positions: [FindPosition]
+}
+
+type FinancialType {
+  player_id: ID
+  player_name: String
+  value: Int
+  description: String
+}
+
+type FindPosition {
+  position: String
+}
+# **********
+# FIM TYPES
+# *******
+
+# **********
+# INPUTS
+# *******
+
+input TeamInput {
+  team_name: String!
+  team_image: String
+  month_payment: [InputMonthPayment]
+  spending: [InputFinancialType]
+  profit: [InputFinancialType]
+  find_player: Boolean
+  find_positions: [String]
+}
+
+input InputFinancialType {
+  value: Int,
+  description: String
+}
+
+input InputMonthPayment {
+  player_id: ID
+  player_name: String
+  value: Int,
+  description: String
+}
+
+# **********
+# FIM INPUTS
+# *******
