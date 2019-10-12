@@ -1,6 +1,6 @@
 <img src="icon.png" align="right" />
 
-# Aplicativo de match entre jogadores de times de futebol (nome a definir)
+# Aplicativo de match entre jogadores de times e futebol (nome a definir)
 > Finalidade do projeto
 
 A idéia do aplicativo nasceu da necessidade de se controlar as mensalidades do time de futebol que faço parte, visto que os diretores costumam fazer suas anotações e controles dos atletas em planilhas de Excel, imaginei a necessidade de otros times que fazem a gestão da mesma maneira.
