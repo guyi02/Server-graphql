@@ -7,6 +7,11 @@ type LoginResponse {
   user: User
   logged: Boolean
 }
+
+type AuthResponse {
+  token: String
+  logged: Boolean
+}
 # **********
 # FIM TYPES
 # *******
@@ -18,6 +23,10 @@ type LoginResponse {
 input InputLogin {
   email: String!
   password: String!
+}
+
+input InputAuth {
+  token: String!
 }
 # **********
 # FIM INPUTS

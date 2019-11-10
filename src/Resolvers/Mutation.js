@@ -107,7 +107,7 @@ export default {
             },
             'mysecret',
             {
-                expiresIn: '15d', // token will expire in 15days
+                expiresIn: '1d', // token will expire in 15days
             },
         )
         return {
@@ -116,9 +116,22 @@ export default {
             logged: true
         }
     },
+
+    refreshToken: async (root, {}, {userToken}) => {
+        const [bearer, token] = userToken.split(' ');
+        jwt.verify(token, 'mysecret', (err, decode) => {
+            if(!decode){
+                throw new Error("Token inválido!")
+            }
+        }); 
+        return{
+            token,
+            logged: true
+        }
+    },
     // PLAYER
     RegisterPlayer: async (
-        parent,
+        root,
         { dados },
         { userToken, Player }) => {
         const [bearer, token] = userToken.split(' ');
@@ -160,7 +173,7 @@ export default {
     },
     // TEAM
     RegisterTeam: async (
-        parent,
+        root,
         { dados },
         { userToken, Team }) => {
         const [bearer, token] = userToken.split(' ');
