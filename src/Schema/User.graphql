@@ -1,86 +1,92 @@
 # **********
 # TYPES
 # *******
+scalar Upload
+
 type User {
-  id: ID!
-  email: String!
-  password: String!
-  confirmPassword: String!
-  is_team: Boolean!
-  pro_user: ProUser
-  trial: Trial
+    id: ID!
+    email: String!
+    password: String!
+    confirmPassword: String!
+    is_team: Boolean!
+    pro_user: ProUser
+    trial: Trial
 }
 
 type DeleteResponse {
-  message: String
+    message: String
 }
 
 type ProUser {
-  active: Boolean
-  start_in: String
+    active: Boolean
+    start_in: String
 }
 
 type Trial {
-  is_trial: Boolean
-  start_in: String
+    is_trial: Boolean
+    start_in: String
+}
+
+type File {
+    filename: String
+    mimetype: String
+    encoding: String
+    url: String
 }
 
 # **********
 # FIM TYPES
 # *******
 
-
 # **********
 # INPUTS
 # *******
 input InputUser {
-  email: String!
-  password: String!
-  confirmPassword: String!
-  is_team: Boolean!
-  pro_user: InputProUser
-  trial: InputTrial
+    email: String!
+    password: String!
+    confirmPassword: String!
+    is_team: Boolean!
+    pro_user: InputProUser
+    trial: InputTrial
 }
 
 input InputUserUpdate {
-  id: ID
-  email: String
-  password: String
-  confirmPassword: String
-  is_team: Boolean
-  pro_user: InputProUser
-  trial: InputTrial
+    id: ID
+    email: String
+    password: String
+    confirmPassword: String
+    is_team: Boolean
+    pro_user: InputProUser
+    trial: InputTrial
 }
 
 input InputDiferencials {
-  good: String,
-  very_good: String,
-  excelent: String
+    good: String
+    very_good: String
+    excelent: String
 }
 
 input InputAvaliableDays {
-  day: String
+    day: String
 }
 
 input InputAvaliableHours {
-  hour: String
+    hour: String
 }
 
 input InputFindPositions {
-  position: String
+    position: String
 }
 
 input InputProUser {
-  active: Boolean
-  start_in: String
+    active: Boolean
+    start_in: String
 }
 
 input InputTrial {
-  is_trial: Boolean
-  start_in: String
+    is_trial: Boolean
+    start_in: String
 }
-
-
 # **********
 # FIM INPUTS
 # *******

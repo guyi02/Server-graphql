@@ -3,30 +3,29 @@
 # *******
 
 type LoginResponse {
-  token: String
-  user: User
-  logged: Boolean
+    token: String
+    user: User
+    logged: Boolean
 }
 
 type AuthResponse {
-  token: String
-  logged: Boolean
+    token: String
+    logged: Boolean
 }
 # **********
 # FIM TYPES
 # *******
 
-
 # **********
 # INPUTS
 # *******
 input InputLogin {
-  email: String!
-  password: String!
+    email: String!
+    password: String!
 }
 
 input InputAuth {
-  token: String!
+    token: String!
 }
 # **********
 # FIM INPUTS

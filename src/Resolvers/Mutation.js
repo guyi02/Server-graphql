@@ -1,10 +1,12 @@
 import jwt from "jsonwebtoken";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
+import cloudinary from "cloudinary";
+require("dotenv").config();
 
 export default {
     // USER
     createUser: async (root, { dados }, { User }) => {
-        const { 
+        const {
             email,
             password,
             confirmPassword,
@@ -12,12 +14,12 @@ export default {
             players,
             team,
             pro_user,
-            trial
-        } = dados
+            trial,
+        } = dados;
         const verifiUser = await User.findOne({ email });
 
         if (verifiUser) {
-            throw new Error('Email já cadastrado')
+            throw new Error("Email já cadastrado");
         }
 
         if (password !== confirmPassword) {
@@ -32,43 +34,41 @@ export default {
                 players,
                 team,
                 pro_user,
-                trial
-            }).save()
+                trial,
+            }).save();
             return user;
         } catch (error) {
-            return error
+            return error;
         }
     },
 
     updateUser: async (root, { dados }, { userToken, User }) => {
-
-        const [bearer, token] = userToken.split(' ');
-        jwt.verify(token, 'mysecret', (err, decode) => {
+        const [bearer, token] = userToken.split(" ");
+        jwt.verify(token, "mysecret", (err, decode) => {
             if (err || !decode) {
-                throw new Error("Usuário não autenticado")
+                throw new Error("Usuário não autenticado");
             }
-
-        })
+        });
 
         try {
-            const userUpdated = await User.findByIdAndUpdate({ _id: dados.id }, { $set: dados }, { new: true });
-            return userUpdated
+            const userUpdated = await User.findByIdAndUpdate(
+                { _id: dados.id },
+                { $set: dados },
+                { new: true },
+            );
+            return userUpdated;
         } catch (error) {
-            return error
+            return error;
         }
-
-
-
     },
 
     deleteUser: async (root, { _id }, { userToken, User }) => {
-
-        const [bearer, token] = userToken.split(' ');
-        jwt.verify(token, 'mysecret', (err, decode) => {
+        const [bearer, token] = userToken.split(" ");
+        jwt.verify(token, "mysecret", (err, decode) => {
             if (err || !decode) {
-                throw new Error("Usuário não autenticado")
+                throw new Error("Usuário não autenticado");
             }
-        })
+        });
 
         const verifiUser = await User.findOne({ _id });
 
@@ -77,13 +77,13 @@ export default {
         }
 
         try {
-            await User.findByIdAndDelete({ _id })
+            await User.findByIdAndDelete({ _id });
 
             return {
-                message: "Deletado com sucesso!"
-            }
+                message: "Deletado com sucesso!",
+            };
         } catch (error) {
-            return error
+            return error;
         }
     },
     // AUTH
@@ -91,13 +91,13 @@ export default {
         const user = await User.findOne({ email });
 
         if (!user) {
-            throw new Error('Usuário não cadastrado')
+            throw new Error("Usuário não cadastrado");
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            throw new Error('Senha inválida')
+            throw new Error("Senha inválida");
         }
 
         const responseToken = jwt.sign(
@@ -105,41 +105,29 @@ export default {
                 id: user.id,
                 username: user.email,
             },
-            'mysecret',
+            "mysecret",
             {
-                expiresIn: '1d', // token will expire in 15days
+                expiresIn: "1d", // token will expire in 15days
             },
-        )
+        );
         return {
             token: `Bearer ${responseToken}`,
             user,
-            logged: true
-        }
-    },
-
-    refreshToken: async (root, {}, {userToken}) => {
-        const [bearer, token] = userToken.split(' ');
-        jwt.verify(token, 'mysecret', (err, decode) => {
-            if(!decode){
-                throw new Error("Token inválido!")
-            }
-        }); 
-        return{
-            token,
-            logged: true
-        }
+            logged: true,
+        };
     },
     // PLAYER
-    RegisterPlayer: async (
-        root,
-        { dados },
-        { userToken, Player }) => {
-        const [bearer, token] = userToken.split(' ');
-        jwt.verify(token, 'mysecret', (err, decode) => {
+    RegisterPlayer: async (root, { dados }, { userToken, Player }) => {
+        const [bearer, token] = userToken.split(" ");
+        if (!token) throw new Error("Usuário não autenticado");
+        if (!token) {
+            throw new Error("Você não possui um token");
+        }
+        jwt.verify(token, "mysecret", (err, decode) => {
             if (err || !decode) {
-                throw new Error("Usuário não autenticado")
+                throw new Error("Usuário não autenticado");
             }
-        })
+        });
 
         const objArgs = JSON.parse(JSON.stringify(dados));
 
@@ -166,22 +154,20 @@ export default {
                 position_secondary: objArgs.position_secondary,
                 available: objArgs.available,
             }).save();
-            return player
+            return player;
         } catch (error) {
-            return error
+            return error;
         }
     },
     // TEAM
-    RegisterTeam: async (
-        root,
-        { dados },
-        { userToken, Team }) => {
-        const [bearer, token] = userToken.split(' ');
-        jwt.verify(token, 'mysecret', (err, decode) => {
+    RegisterTeam: async (root, { dados }, { userToken, Team }) => {
+        const [bearer, token] = userToken.split(" ");
+        if (!token) throw new Error("Usuário não autenticado");
+        jwt.verify(token, "mysecret", (err, decode) => {
             if (err || !decode) {
-                throw new Error("Usuário não autenticado")
+                throw new Error("Usuário não autenticado");
             }
-        })
+        });
 
         const objArgs = JSON.parse(JSON.stringify(dados));
 
@@ -192,12 +178,53 @@ export default {
                 month_payment: objArgs.month_payment,
                 spending: objArgs.spending,
                 profit: objArgs.profit,
-                find_positions: objArgs.find_positions
+                find_positions: objArgs.find_positions,
             }).save();
-            return team
+            return team;
         } catch (error) {
             if (error.code === 11000)
-                throw new Error("Já existe time com este nome cadastrado")
+                throw new Error("Já existe time com este nome cadastrado");
         }
-    }
+    },
+
+    singleUpload: async (root, { file }) => {
+        cloudinary.config({
+            cloud_name: process.env.CLOUD_NAME,
+            api_key: process.env.API_KEY,
+            api_secret: process.env.API_SECRET,
+        });
+        const { filename, createReadStream, mimetype, encoding } = await file;
+
+        const uploadToCloudinary = () => {
+            return new Promise((resolve, reject) => {
+                const uploadStream = cloudinary.v2.uploader.upload_stream(
+                    {
+                        folder: "app_assets",
+                        public_id: filename
+                            .split(".")
+                            .slice(0, -1)
+                            .join("."),
+                        invalidate: true,
+                    },
+                    (error, result) => {
+                        if (result) {
+                            resolve(result);
+                        } else {
+                            reject(error);
+                        }
+                    },
+                );
+
+                const stream = createReadStream();
+                stream.pipe(uploadStream);
+            });
+        };
+        const result = await uploadToCloudinary();
+        return {
+            filename,
+            mimetype,
+            encoding,
+            url: result.url,
+        };
+    },
 };
