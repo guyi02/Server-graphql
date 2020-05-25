@@ -5,5 +5,4 @@ type Query {
   getPlayer(id: ID!): Player
   getPlayers: [Player!]
   getTeams: [Team]
-  refreshToken: AuthResponse
 }

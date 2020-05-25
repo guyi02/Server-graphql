@@ -3,50 +3,50 @@
 # *******
 
 type Player {
-    id: ID
-    name: String
-    surname: String
-    play_for_team: String
-    nick_name: String
-    height: Int
-    weight: Int
-    foot: String
-    phone: String
-    profile_img: String
-    profile_video: String
-    description: String
-    cpf: String
-    habilities: Habilities
-    diferencials: Diferencials
-    avaliable_days: [AvaliableDays]
-    avaliable_hours: [AvaliableHours]
-    goals: Int
-    position: String
-    position_secondary: String
-    available: Boolean
+  id: ID
+  name: String
+  surname: String
+  play_for_team: String
+  nick_name: String
+  height: Float
+  weight: Int
+  foot: String
+  phone: String
+  profile_img: String
+  profile_video: String
+  description: String
+  cpf: String
+  habilities: Habilities
+  diferencials: Diferencials
+  avaliable_days: [AvaliableDays]
+  avaliable_hours: [AvaliableHours]
+  goals: Int
+  position: String
+  position_secondary: String
+  available: Boolean
 }
 
 type Habilities {
-    pace: Int
-    drible: Int
-    defense: Int
-    shoot: Int
-    pass: Int
-    physic: Int
+  pace: Int
+  drible: Int
+  defense: Int
+  shoot: Int
+  pass: Int
+  physic: Int
 }
 
 type Diferencials {
-    good: String
-    very_good: String
-    excelent: String
+  good: String
+  very_good: String
+  excelent: String
 }
 
 type AvaliableDays {
-    day: String
+  day: String
 }
 
 type AvaliableHours {
-    hour: String
+  hour: String
 }
 
 # **********
@@ -58,34 +58,34 @@ type AvaliableHours {
 # *******
 
 input PlayerInput {
-    name: String
-    surname: String
-    play_for_team: TeamInput
-    nick_name: String
-    height: String
-    weight: String
-    foot: String
-    phone: String
-    profile_img: String
-    profile_video: String
-    description: String
-    cpf: String
-    habilities: InputHabilities
-    diferencials: InputDiferencials
-    avaliable_days: [InputAvaliableDays]
-    avaliable_hours: [InputAvaliableHours]
-    position: String
-    position_secondary: String
-    available: Boolean
+  name: String
+  surname: String
+  play_for_team: TeamInput
+  nick_name: String
+  height: String
+  weight: String
+  foot: String
+  phone: String
+  profile_img: String
+  profile_video: String
+  description: String
+  cpf: String
+  habilities: InputHabilities
+  diferencials: InputDiferencials
+  avaliable_days: [InputAvaliableDays]
+  avaliable_hours: [InputAvaliableHours]
+  position: String
+  position_secondary: String
+  available: Boolean
 }
 
 input InputHabilities {
-    pace: Int
-    drible: Int
-    defense: Int
-    shoot: Int
-    pass: Int
-    physic: Int
+  pace: Int
+  drible: Int
+  defense: Int
+  shoot: Int
+  pass: Int
+  physic: Int
 }
 
 # **********
